@@ -1,8 +1,10 @@
 import React from "react";
 import TodoItem from "./TodoItem";
+import "./Todo.css";
 
 const TodoItemList = () => (
-    <div>
+    <div className="itemlist">
+         <TodoItem />
     </div>
 );
 
