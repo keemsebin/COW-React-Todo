@@ -2,9 +2,17 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import "./Todo.css";
 
-const TodoItemList = () => (
+const TodoItemList = ({todoList, setTodoList}) => (
     <div className="itemlist">
-         <TodoItem />
+            {todoList && 
+                todoList.map((todoItem) => (
+                <TodoItem 
+                    key={todoItem.id}
+                    todoItem={todoItem}
+                    todoList={todoList}
+                    setTodoList={setTodoList}
+                />
+            ))}
     </div>
 );
 
