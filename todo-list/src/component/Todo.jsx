@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoInsert from "./TodoInsert";
 import TodoItemList from "./TodoItemList";
 import "./Todo.css";
 
 const Todo = () => {
+    const [todoList, setTodoList] = useState([]);
     return (
-        <div className="Home">
+
+            <div className="Home">
                 <span className="titlename">What to do ?</span>
-                <TodoInsert/>
-                <TodoItemList/>
+                <TodoInsert todoList={todoList} setTodoList={setTodoList} />
+                <TodoItemList
+                    todoList={todoList}
+                    setTodoList={setTodoList}
+                    checkedbox={false}
+                />
             </div>
     );
 };
