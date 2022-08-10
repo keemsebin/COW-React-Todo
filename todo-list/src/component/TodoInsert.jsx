@@ -13,13 +13,13 @@ const TodoInsert = ({ todoList, setTodoList}) => {
             return;
         }
         const newtodo = todoList.concat({
-            id : todoList.length,
+            id : addRef.current,
             toDo,
             checked : false,
         });
         setTodoList(newtodo);
-        setToDo("");
-        addRef.current.focus();
+        setToDo('')
+        addRef.current +=1;
     }; 
     console.log(todoList);
     return (
