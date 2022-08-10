@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import cn from "classnames";
 import "./Todo.css";
 import {FcFullTrash} from "react-icons/fc";
@@ -7,23 +7,28 @@ import {AiOutlineCheckCircle,AiFillCheckCircle} from "react-icons/ai";
 
 const TodoItem = ({ todoItem, todoList, setTodoList}) => {
     const {id, checked} = todoItem;
-    const onCheckbox = (id) =>{
+    const onCheckbox = useCallback(id => {
        setTodoList(
             todoList.map(todo =>
-                todo.id ===id ? {...todo, checked : !todo.checked} : todo,
+                todo.id ===id ? {...todo, checked : !todo.checked} : todo
                 ),
             );
-    };
+    },[todoList]);
+    
+    const onDelete = useCallback(id =>{
+        setTodoList(todoList.filter(
+            tododelete => tododelete.id !== id
+            ));
+    }, [todoList]);
     return(
         <li className="item" >
-            <div className={cn('checkbox', {checked:checked})} 
-            onClick={()=>onCheckbox(id)}>
+            <div className={cn('checkbox', {checked})} onClick={()=>onCheckbox(id)}>
                 {checked ? <AiFillCheckCircle size="21"/>:<AiOutlineCheckCircle size="21"/> } 
             </div>
             <span className="item-todo">{todoItem.toDo}</span>
-            <span type="button" className="item-delete"> 
+            <div className="item-delete" onClick={()=>onDelete(id)}> 
                 <FcFullTrash size="21"/>
-            </span>
+            </div>
         </li>
     );
 };
