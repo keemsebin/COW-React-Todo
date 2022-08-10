@@ -2,7 +2,7 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import "./Todo.css";
 
-const TodoItemList = ({todoList, setTodoList}) => (
+const TodoItemList = ({todoList, setTodoList, onCheckbox}) => (
     <div className="itemlist">
             {todoList && 
                 todoList.map((todoItem) => (
@@ -11,6 +11,7 @@ const TodoItemList = ({todoList, setTodoList}) => (
                     todoItem={todoItem}
                     todoList={todoList}
                     setTodoList={setTodoList}
+                    onCheckbox={onCheckbox}
                 />
             ))}
     </div>

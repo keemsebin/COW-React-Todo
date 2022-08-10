@@ -13,7 +13,7 @@ const Todo = () => {
                 <TodoItemList
                     todoList={todoList}
                     setTodoList={setTodoList}
-                    checkedbox={false}
+                    checked= "<AiOutlineCheckCircle/>"
                 />
             </div>
     );
