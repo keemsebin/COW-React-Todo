@@ -1,40 +1,42 @@
-import React,{useState, useRef} from "react";
+import React,{useState, useRef, useEffect, useCallback} from "react";
+import axios, { Axios } from "axios";
 import "./Todo.css";
 
 const TodoInsert = ({ todoList, setTodoList}) => {
+    
     const [toDo, setToDo] = useState("");
-    const addRef = useRef(null);
+    const addRef = useRef(1);
 
-    const onChange = (event) => { setToDo(event.target.value)};
+    const onChange =useCallback( (event) => { setToDo(event.target.value)});
 
-    const onSubmit = (event) => {
-        event.preventDefault();
+    const onSubmit = useCallback((event) => {
+        event.preventDefault()
         if (toDo ===""){
             return;
         }
-        const newtodo = todoList.concat({
-            id : addRef.current,
+        const newtodo ={
+            id :addRef.current,
             toDo,
             checked : false,
-        });
-        setTodoList(newtodo);
-        setToDo('')
-        addRef.current +=1;
-    }; 
+        };
+        setTodoList(todoList.concat(newtodo));
+        addRef.current+=1;
+        setToDo("");
+    }); 
     console.log(todoList);
+   
     return (
         <div >
-            <form className="Insert" onSubmit={onSubmit} >
+            <form className="Insert" ref={addRef} onSubmit={onSubmit}>
                 <input 
                     type="text"
                     name="todoItem"
                     value={toDo}
-                    ref={addRef}
-                    placeholder="Write to do"
+                    placeholder="Enter what to do today !"
                     className="Insert-in"
                     onChange={onChange}
                 />
-                <button type="submit" className="Insert-add">
+                <button type="submit"className="Insert-add">
                     ADD
                 </button>
             </form>

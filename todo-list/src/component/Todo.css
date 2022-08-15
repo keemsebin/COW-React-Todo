@@ -1,18 +1,35 @@
+@font-face {
+    font-family: 'IBMPlexSansKR-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    font-family:'IBMPlexSansKR-Medium';
+}
 .Home{
     width: 700px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding: 50px;
-    font-family: Arial;
+    padding: 40px;
+    
 }
 .titlename{
     margin-top: 75px;
-    font-weight: bold;
     color: #BE7CDD;
-    font-size: 75px;
-    
+    font-weight: 900;
+    font-size: 80px;
+}
+.today{
+    text-align: right;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(126, 121, 121, 0.678) ;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 25px;
 }
 .Insert{
     display: flex;
@@ -25,15 +42,16 @@
 }
 .Insert-in{
     flex: 1;
-    margin-top: 40px ;
-    margin-bottom: 10px;
-    padding: 20px;
+    margin-top: 20px ;
+    margin-bottom: 20px;
+    padding: 25px;
     height: 60px;
     background-color: #F3ECF480;
     border-radius: 20px;
     box-sizing: border-box;
     border-style: none;
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: 700;
     align-items: center;
     justify-content: center;
 }
@@ -42,18 +60,19 @@
 }
 .Insert-add{
     border:none;
+    cursor: pointer;
     border-radius: 0;
     height: 60px;
     width: 60px;
-    font-weight: bold;
-    margin-top: 40px;
-    margin-bottom: 10px;
+    font-weight: 800;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 20px;
 }
 .itemlist{
     display: flex;
     width: 550px;
-    justify-content: center;  
+    justify-content: cen0ter;  
     flex-direction: column;
     margin-top: 5px;
     margin-left: auto;
@@ -61,18 +80,11 @@
     border-radius: 20px;
     background-color: #F3ECF480;
 }
-.itemlist-ul{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding: 0;
-}
+
 .item{
     display: flex;
     align-items: center;
-    height: 40px;
+    height: 50px;
 }
 .item:nth-child(1){
     margin-top: 8px;
@@ -83,15 +95,37 @@
 .item-todo{
     flex: 1;
     text-align: left;
-    margin-left: 5px ;
-    margin-top: auto;
-    margin-bottom: auto;
+    font-size: 22px;
+    margin-left: auto ;
+    margin-bottom: 2px;
+}
+.item-update{
+    display: flex;
+    flex: 1;
+    border-style: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    text-align: left;
+    height: 25px;
+    font-size: 21px;
+    color: grey;
+    background-color: inherit;
+    width: 405px;
+    box-sizing: border-box;
+}
+.item-update:focus{
+    outline: none;
+}
+
+.item-todo + .item-todo {
+    border-top : 1px solid black;
 }
 .checkbox{
     cursor: pointer;
     margin-top: 5px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color : rgb(27, 26, 26);
 }
 .checkbox.checked{
     color: #34303580;
@@ -104,6 +138,7 @@
 .item-delete{
     cursor: pointer;
     margin-top: 5px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
+
