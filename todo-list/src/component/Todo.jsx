@@ -5,7 +5,7 @@ import "./Todo.css";
 
 
 
-const Todo = () => {
+const Todo = ({checked}) => {
 
     const [todoList, setTodoList] = useState([]);
     const [count, setCount] = useState(null);
