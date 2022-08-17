@@ -1,33 +1,28 @@
-import React,{useState, useRef, useEffect, useCallback} from "react";
+import React,{useState,  useCallback} from "react";
 import axios, { Axios } from "axios";
 import "./Todo.css";
 
-const TodoInsert = ({ todoList, setTodoList}) => {
+const TodoInsert = ({count, setCount}) => {
     
-    const [toDo, setToDo] = useState("");
-    const addRef = useRef(1);
+    const [toDo,setToDo] = useState("");
+    const onChange =useCallback((event) => {
+         setToDo(event.target.value)
+        });
 
-    const onChange =useCallback( (event) => { setToDo(event.target.value)});
-
-    const onSubmit = useCallback((event) => {
-        event.preventDefault()
-        if (toDo ===""){
-            return;
-        }
-        const newtodo ={
-            id :addRef.current,
-            toDo,
-            checked : false,
-        };
-        setTodoList(todoList.concat(newtodo));
-        addRef.current+=1;
-        setToDo("");
+    const onSubmit = useCallback((e) => {
+        e.preventDefault();
+        axios.post("http://localhost:5000/todo",{"content":toDo})
+        .then(function (respnonse) {
+            console.log("성공");
+            console.log(respnonse);
+            setCount(count+1);
+        })
+        setToDo('');
     }); 
-    console.log(todoList);
    
     return (
         <div >
-            <form className="Insert" ref={addRef} onSubmit={onSubmit}>
+            <form className="Insert" onSubmit={onSubmit}>
                 <input 
                     type="text"
                     name="todoItem"
@@ -36,7 +31,7 @@ const TodoInsert = ({ todoList, setTodoList}) => {
                     className="Insert-in"
                     onChange={onChange}
                 />
-                <button type="submit"className="Insert-add">
+                <button type="submit" className="Insert-add">
                     ADD
                 </button>
             </form>
