@@ -6,32 +6,41 @@ import {FcFullTrash} from "react-icons/fc";
 import {AiOutlineCheckCircle,AiFillCheckCircle,} from "react-icons/ai";
 
 
-const TodoItem = ({ todoItem, todoList, setTodoList}) => {
+const TodoItem = ({count,setCount, todoItem}) => {
     
-    const {id, checked} = todoItem;
-    const [edited, setEdited] = useState(false);//isupate
-    const [newText, setNewText] = useState(todoItem.toDo);//value
-    const editRef = useRef(null);
-
-    useEffect(()=> {
-        if(edited) {
-            editRef.current.focus();
-        }
-    },[edited]);
+    const {id,content} = todoItem;
+    const [edited, setEdited] = useState(false);
+    const [newText, setNewText] = useState(todoItem.toDo);
+    const [checked, setChecked] = useState(false);
 
     const onCheckbox = useCallback(() => {
-        setTodoList(
-            todoList.map(todo =>
-                todo.id ===id ? {...todo, checked : !todo.checked} : todo
-                ),
-            );
-        },[todoList]);
+        axios.patch("http://localhost:5000/todo/status/"+id)
+        .then(function(response){
+            console.log(response);
+            if(checked==false){
+                setChecked(true);
+            }
+            else{
+                setChecked(false);
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+        setCount(count+1);
+        });
     
-    const onDelete = useCallback(id =>{
-        setTodoList(todoList.filter(
-            tododelete => tododelete.id !== id
-            ));
-        }, [todoList]);
+    const onDelete = useCallback( () =>{
+        axios.delete("http://localhost:5000/todo/"+id)
+        .then(function(response){
+            console.log(response);
+            setCount(count+1);
+            console.log("삭제");
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    });
 
     const onClickTodo = () => { 
         setEdited(true);
@@ -46,23 +55,27 @@ const TodoItem = ({ todoItem, todoList, setTodoList}) => {
     };
     const onSubmitEdit = useCallback ((e) => {
         e.preventDefault();
-        const nextTodoList = todoList.map((item) =>({
-            ...item, toDo : item.id === todoItem.id ? newText : item.toDo,
-        }));
-        setTodoList(nextTodoList);
-        setEdited(false);
+        axios.patch("http://localhost:5000/todo/"+id,{"content":newText})
+            .then(function(response){
+                console.log(response);
+                setCount(count+1);
+            })
+            .catch(function(error){
+                console.log(error);
+           })
+           setEdited(false);
     });
+
     return(
         <li className="item" >
             <div className={cn('checkbox', {checked})} onClick={()=>onCheckbox(id)}>
-                {checked ? <AiFillCheckCircle size="27"/>:<AiOutlineCheckCircle size="27"/> } 
+                {checked ? <AiFillCheckCircle size="27"/> : <AiOutlineCheckCircle size="27"/>}
             </div>
             {edited? (
-                <form onSubmit={onSubmitEdit} >
+                <form onSubmit={onSubmitEdit}>
                     <input
                         type="text"
                         value={newText}
-                        ref={editRef}
                         onChange={onChangeInput}
                         className="item-update"
                         onKeyUp={onKeyInput}
@@ -70,14 +83,14 @@ const TodoItem = ({ todoItem, todoList, setTodoList}) => {
                 </form>
                 ) : (
                 <span
-                    className={`item-todo ${todoItem.checked ? 'item-todo' : ''}`} 
-                    onDoubleClick={onClickTodo} 
+                    className={`item-todo ${todoItem.checked ? 'item-todo' : ''}`}
+                    onDoubleClick={onClickTodo}
                     >
-                    {todoItem.toDo}
-                    </span>
-                 )
+                    {content}
+                </span>
+                )
             }
-            <div className="item-delete" onClick={()=>{ onDelete(id)}}> 
+            <div className="item-delete" onClick={onDelete}> 
                 <FcFullTrash size="27"/>
             </div>
         </li>

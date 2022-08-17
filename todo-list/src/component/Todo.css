@@ -95,9 +95,9 @@
 .item-todo{
     flex: 1;
     text-align: left;
-    font-size: 22px;
-    margin-left: auto ;
-    margin-bottom: 2px;
+    font-size: 21px;
+    height: 25px;
+    margin-bottom: 7px;
 }
 .item-update{
     display: flex;

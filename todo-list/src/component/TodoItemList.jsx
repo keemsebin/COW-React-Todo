@@ -2,26 +2,34 @@ import React,{useEffect} from "react";
 import TodoItem from "./TodoItem";
 import axios from "axios";
 import "./Todo.css";
+import { useState } from "react";
 
-const TodoItemList = ({title,todoList, setTodoList, onDelete, onCheckbox,onUpdate ,onSubmitEdit}) => {
+const TodoItemList = ({count,title,setCount,todoList, setTodoList}) => {
+    
+    useEffect(()=>{ 
+        axios.get("http://localhost:5000/todo")
+        .then(function(response){ 
+            setTodoList(response.data)
+            console.log(response);
+         })
+        },[count]);
+ 
     return (
-    <div >
-         <ul className="itemlist">
+        <div >
+            <div className="itemlist">
                 {todoList&&
-                        todoList.map((todoItem) => (
+                    todoList.map((todoItem) => (
                     <TodoItem 
                         key={todoItem.id}
                         todoItem={todoItem}
                         todoList={todoList}
                         setTodoList={setTodoList}
-                        onCheckbox={onCheckbox}
-                        onDelete={onDelete}
-                        onUpdate={onUpdate}
-                        onSubmitEdit={onSubmitEdit}
-                    />
-                ))}
-        </ul>
-    </div>
+                        count={count}
+                        setCount={setCount}
+                />
+            ))}
+        </div>
+        </div>
     );
 }
 
