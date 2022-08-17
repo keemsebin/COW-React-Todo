@@ -6,22 +6,22 @@ import {FcFullTrash} from "react-icons/fc";
 import {AiOutlineCheckCircle,AiFillCheckCircle,} from "react-icons/ai";
 
 
-const TodoItem = ({count,setCount, todoItem}) => {
+const TodoItem = ({count,setCount,todoItem}) => {
     
-    const {id,content} = todoItem;
+    const {id,content,isCompleted} = todoItem;
     const [edited, setEdited] = useState(false);
     const [newText, setNewText] = useState(todoItem.toDo);
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] =useState(todoItem.isCompleted);
 
-    const onCheckbox = useCallback(() => {
-        axios.patch("http://localhost:5000/todo/status/"+id)
+    const onCheckbox = useCallback((id) => {
+        axios.patch("http://localhost:5000/todo/status/"+id,{"isCompleted": checked})
         .then(function(response){
             console.log(response);
-            if(checked==false){
-                setChecked(true);
-            }
-            else{
+            if (checked==true){
                 setChecked(false);
+            }
+            else {
+                setChecked(true);
             }
         })
         .catch(function(error){
@@ -83,7 +83,7 @@ const TodoItem = ({count,setCount, todoItem}) => {
                 </form>
                 ) : (
                 <span
-                    className={`item-todo ${todoItem.checked ? 'item-todo' : ''}`}
+                    className={`item-todo ${todoItem.isCompleted? 'item-todo' : ''}`}
                     onDoubleClick={onClickTodo}
                     >
                     {content}
