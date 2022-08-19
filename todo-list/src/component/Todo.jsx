@@ -3,9 +3,7 @@ import TodoInsert from "./TodoInsert";
 import TodoItemList from "./TodoItemList";
 import "./Todo.css";
 
-
-
-const Todo = ({checked}) => {
+const Todo = ({isCompleted}) => {
 
     const [todoList, setTodoList] = useState([]);
     const [count, setCount] = useState(null);
@@ -20,7 +18,6 @@ const Todo = ({checked}) => {
     return (
             <div className="Home">
                 <span className="titlename">What to do ?</span>
-                <span className="today">{now}</span>
                 <TodoInsert 
                     count={count} 
                     setCount={setCount}
@@ -32,9 +29,18 @@ const Todo = ({checked}) => {
                     setTodoList={setTodoList}
                     count={count}
                     setCount={setCount}
-                    checked="<AiOutlineCheckCircle/>"
-                />
+                    checkedList={false}
+                />  
+                <TodoItemList
+                    title="Done"
+                    todoList={todoList}
+                    setTodoList={setTodoList}
+                    count={count}
+                    setCount={setCount}
+                    checkedList={true}
+                /> 
             </div>
+                
     );
 };
 
