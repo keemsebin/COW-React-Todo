@@ -3,7 +3,7 @@ import cn from "classnames";
 import axios from "axios";
 import "./Todo.css";
 import {FcFullTrash} from "react-icons/fc";
-import {AiOutlineCheckCircle,AiFillCheckCircle,} from "react-icons/ai";
+import {AiOutlineCheckCircle,AiFillCheckCircle} from "react-icons/ai";
 
 
 const TodoItem = ({count,setCount,todoItem}) => {
@@ -17,17 +17,18 @@ const TodoItem = ({count,setCount,todoItem}) => {
         axios.patch("http://localhost:5000/todo/status/"+id,{"isCompleted": checked})
         .then(function(response){
             console.log(response);
-            if (checked==true){
+            if (id.checked==true){
                 setChecked(false);
+                setCount(count+1);
             }
             else {
                 setChecked(true);
+                setCount(count+1);
             }
         })
         .catch(function(error){
             console.log(error);
         })
-        setCount(count+1);
         });
     
     const onDelete = useCallback( () =>{
@@ -68,7 +69,9 @@ const TodoItem = ({count,setCount,todoItem}) => {
 
     return(
         <li className="item" >
-            <div className={cn('checkbox', {checked})} onClick={()=>onCheckbox(id)}>
+            <div className={cn('checkbox', {checked})} 
+                onClick={()=>onCheckbox(id)}
+                >
                 {checked ? <AiFillCheckCircle size="27"/> : <AiOutlineCheckCircle size="27"/>}
             </div>
             {edited? (
@@ -79,6 +82,7 @@ const TodoItem = ({count,setCount,todoItem}) => {
                         onChange={onChangeInput}
                         className="item-update"
                         onKeyUp={onKeyInput}
+                        check={isCompleted}
                     />
                 </form>
                 ) : (

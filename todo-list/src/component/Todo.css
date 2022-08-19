@@ -14,13 +14,14 @@
     flex-direction: column;
     text-align: center;
     padding: 40px;
-    
+
 }
 .titlename{
     margin-top: 75px;
     color: #BE7CDD;
     font-weight: 900;
-    font-size: 80px;
+    font-size: 90px;
+    margin-bottom: 20px;
 }
 .today{
     text-align: right;
@@ -36,13 +37,13 @@
     margin-left: auto;
     margin-right: auto;
     align-items: center;
-    padding:10px 10px 10px 10px;
+
     width: 600px;
     justify-content: center;
 }
 .Insert-in{
     flex: 1;
-    margin-top: 20px ;
+    margin-top: 15px ;
     margin-bottom: 20px;
     padding: 25px;
     height: 60px;
@@ -65,7 +66,7 @@
     height: 60px;
     width: 60px;
     font-weight: 800;
-    margin-top: 20px;
+    margin-top: 25px;
     margin-bottom: 20px;
     border-radius: 20px;
 }
@@ -74,7 +75,7 @@
     width: 550px;
     justify-content: cen0ter;  
     flex-direction: column;
-    margin-top: 5px;
+    margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 20px;
@@ -85,12 +86,6 @@
     display: flex;
     align-items: center;
     height: 50px;
-}
-.item:nth-child(1){
-    margin-top: 0;
-}
-.item:last-child{
-    margin-bottom: 8px;
 }
 .item-todo{
     flex: 1;
@@ -144,6 +139,18 @@
     text-align: left;
     font-size: 22px;
     margin-left: 25px;
-    margin-top: 10px;
-
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.filter{
+    list-style: none;
+    font-size: 20px;
+    float: right;
+    margin-right: 25px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.footer{
+    margin-top: 0px;
 }
